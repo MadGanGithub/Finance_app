@@ -65,10 +65,10 @@ const SignInSide = () => {
       }).then(response=>{
         if(response.data.logged){
           toast.success("Loggedin Successfully")
+          setLogged(true);
         }else{
           toast.success(response.data.message)
         }
-        setLogged(true);
       })
       
     }catch(err){

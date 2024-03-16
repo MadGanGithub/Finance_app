@@ -1,12 +1,8 @@
 import jwt from "jsonwebtoken";
 import {comparePassword,hashed} from "../utils/authUtils.js";
-import userPool from "../config/db.js";
 import User from "../models/user.js"
 import Transaction from "../models/transaction.js";
-import { Sequelize } from "sequelize";
 import { Op } from 'sequelize';
-
-const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/postgres');
 
 const signUp=async(req,res)=>{
     try{
@@ -67,7 +63,7 @@ const signIn=async(req,res)=>{
         //Sends cookie
         res.cookie('jwt',token,{
             path:'/',
-            expires: new Date(Date.now() + 24 * 60 * 60 * 1000),//One day
+            expires: new Date(Date.now() + 60 * 60 * 1000),
             httpOnly:true,
             sameSite:'lax'
         })

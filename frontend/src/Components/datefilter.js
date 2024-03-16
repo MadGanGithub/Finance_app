@@ -47,7 +47,7 @@ function DateFilter() {
             const data={
                 date:startDate
             }
-            
+
             await axios.post("http://localhost:4100/transactions/particular",data,{
                 withCredentials:true
               }).then(response=>{
@@ -132,7 +132,7 @@ function DateFilter() {
           </TableRow>
         </TableHead>
         <TableBody>
-        {data==""?<h3>No Results found</h3>:null}
+        {data==""?<TableCell><h3>No Results found</h3></TableCell>:null}
           {data.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.date}</TableCell>

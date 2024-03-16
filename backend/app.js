@@ -5,26 +5,26 @@ import routes from "./routes/routes.js";
 import cors from "cors";
 
 //import adminRoutes from './routes/adminRoutes.js'
-const app=express();
+const app = express();
 
-//cors 
-app.use(cors({
-    credentials:true,
-    origin:"http://localhost:3000"
-}))
+//cors
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 
-//This converts request body to json 
+//This converts request body to json
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
+app.use(express.json());
 
 //cookie parser(if not used,cookies will be undefined)
-app.use(cookieParser())
+app.use(cookieParser());
 
 //body parser(To view in postman)
-//app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
+app.use("/", routes);
 
-app.use("/",routes)
-
-export default app
+export default app;

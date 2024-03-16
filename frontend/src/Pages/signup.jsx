@@ -7,85 +7,81 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   "@global": {
     body: {
-      backgroundColor: theme.palette.common.white
-    }
+      backgroundColor: theme.palette.common.white,
+    },
   },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
-
-
 export default function SignUp() {
-    const [name,setName]=useState("")
-    const [email,setEmail]=useState("")
-    const [password,setPassword]=useState("")
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const navigate=useNavigate()
+  const navigate = useNavigate();
 
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,}$/;
-  
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,}$/;
 
-    const handleSubmit=async(event)=>{
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-            event.preventDefault();
-        
-            if (emailRegex.test(email) &&  passwordRegex.test(password) ) {
-              try{
-                const details={
-                  username:name,
-                  email:email,
-                  password:password,
-                };
-                
-                await axios.post("http://localhost:4100/signup",details,{
-                  withCredentials:true
-                });
-                  
-              }catch(err){
-                console.log(err.message)
-              }
+    if (emailRegex.test(email) && passwordRegex.test(password)) {
+      try {
+        const details = {
+          username: name,
+          email: email,
+          password: password,
+        };
 
-              toast.success("Account created successfully")
-              navigate('/signin');
+        await axios.post("http://localhost:4100/signup", details, {
+          withCredentials: true,
+        });
+      } catch (err) {
+        console.log(err.message);
+      }
 
-            }else { 
-              if(!(emailRegex.test(email)) && !(passwordRegex.test(password))){
-                toast.success("Email and password format is not proper")
-            
-              }else if(!passwordRegex.test(password)){
-                toast.success("Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one digit, and one special character (!@#$%^&*).")
-              
-              }else if(!(emailRegex.test(email))){
-                toast.success("Please enter a valid email address. It should be in the format of name@domain.com and not contain any spaces or special characters except for '@' and '.")
-              }
-            }
-            
+      toast.success("Account created successfully");
+      navigate("/signin");
+    } else {
+      if (!emailRegex.test(email) && !passwordRegex.test(password)) {
+        toast.success("Email and password format is not proper");
+      } else if (!passwordRegex.test(password)) {
+        toast.success(
+          "Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one digit, and one special character (!@#$%^&*)."
+        );
+      } else if (!emailRegex.test(email)) {
+        toast.success(
+          "Please enter a valid email address. It should be in the format of name@domain.com and not contain any spaces or special characters except for '@' and '."
+        );
+      }
     }
+  };
 
   const classes = useStyles();
 
@@ -109,7 +105,7 @@ export default function SignUp() {
                 label="Name: "
                 autoFocus
                 value={name}
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -122,7 +118,7 @@ export default function SignUp() {
                 name="email"
                 autoComplete="email"
                 value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -136,7 +132,7 @@ export default function SignUp() {
                 id="password"
                 autoComplete="current-password"
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
           </Grid>
@@ -144,7 +140,7 @@ export default function SignUp() {
             type="submit"
             fullWidth
             variant="contained"
-            style={{backgroundColor:"#1976D2",color:"white"}}            
+            style={{ backgroundColor: "#1976D2", color: "white" }}
             className={classes.submit}
           >
             Sign Up

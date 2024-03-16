@@ -2,7 +2,6 @@ import express from "express";
 import {
   signUp,
   signIn,
-  check,
   logOut,
   logCheck,
   addTransaction,
@@ -15,7 +14,6 @@ import {
 
 const router = express.Router();
 
-router.route("/").get(check);
 router.route("/signin").post(signIn);
 router.route("/signup").post(signUp);
 router.route("/logout").get(logOut);

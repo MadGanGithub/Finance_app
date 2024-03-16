@@ -169,7 +169,7 @@ const getTransactions = async (req, res) => {
 
     res.status(200).send({
       status: true,
-      message: "Transaction created",
+      message: "Transactions retrieved",
       transaction: arr,
     });
   } catch (err) {
@@ -232,7 +232,7 @@ const filterTransactions = async (req, res) => {
 
     res.status(200).send({
       status: true,
-      message: "Transaction deleted",
+      message: "Filtered transactions retrieved",
       transaction: transactions || [],
     });
   } catch (err) {
@@ -264,7 +264,7 @@ const filterEachTransactions = async (req, res) => {
 
     res.status(200).send({
       status: true,
-      message: "Retrieve filtered transactions",
+      message: "Retrieved filtered transactions",
       transaction: transactions || [],
     });
   } catch (err) {
@@ -321,15 +321,9 @@ const getSummary = async (req, res) => {
   }
 };
 
-const check = async (req, res) => {
-  const users = "Welcome";
-  res.json(users);
-};
-
 export {
   signUp,
   signIn,
-  check,
   logOut,
   logCheck,
   addTransaction,
